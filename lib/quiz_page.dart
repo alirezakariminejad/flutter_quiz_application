@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz_application/constants/constants.dart';
 import 'package:flutter_quiz_application/data/question.dart';
+import 'package:flutter_quiz_application/screens/result_screen.dart';
 
 class Quizpage extends StatefulWidget {
   const Quizpage({super.key});
@@ -13,6 +14,8 @@ class _QuizpageState extends State<Quizpage> {
   int currentQuestionIndex = 0;
   Question? currentQuestion;
   int? lenthOfQuestionList;
+  bool isFinalAnswerSubmitted = false;
+  int correctAnswerCount = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +28,11 @@ class _QuizpageState extends State<Quizpage> {
       appBar: AppBar(
         elevation: 0.0,
         title: Text(
-          'سوالات',
+          'سوال ${currentQuestionIndex + 1} از ${lenthOfQuestionList}',
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
+          textDirection: TextDirection.rtl,
         ),
         centerTitle: true,
         backgroundColor: classicBlue,
@@ -36,11 +40,11 @@ class _QuizpageState extends State<Quizpage> {
       ),
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Image(
               image: AssetImage('images/$currentQuestionImageIndex.png'),
-              height: 350.0,
+              height: 300.0,
             ),
             SizedBox(height: 30.0),
             Text(
@@ -52,11 +56,13 @@ class _QuizpageState extends State<Quizpage> {
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 30.0),
+            SizedBox(height: 15.0),
             ...List.generate(
               4,
               (index) => getOptionsLists(index),
             ),
+            SizedBox(height: 60.0),
+            if (isFinalAnswerSubmitted) showResultButton()
           ],
         ),
       ),
@@ -71,11 +77,16 @@ class _QuizpageState extends State<Quizpage> {
         textAlign: TextAlign.center,
       ),
       onTap: () {
-        // if (currentQuestion!.correctAnswer == index) {
-        //   print('currect');
-        // } else {
-        //   print('wrong');
-        // }
+        if (currentQuestion!.correctAnswer == index) {
+          correctAnswerCount++;
+          print('currect');
+        } else {
+          print('wrong');
+        }
+
+        if (currentQuestionIndex == lenthOfQuestionList! - 1) {
+          isFinalAnswerSubmitted = true;
+        }
 
         setState(() {
           if (currentQuestionIndex < lenthOfQuestionList! - 1) {
@@ -83,6 +94,28 @@ class _QuizpageState extends State<Quizpage> {
           }
         });
       },
+    );
+  }
+
+  Widget showResultButton() {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(150.0, 50.0),
+        backgroundColor: bostonUniversityRed,
+        foregroundColor: Colors.white,
+        elevation: 5.0,
+      ),
+      onPressed: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                ResultScreen(answerCount: correctAnswerCount)));
+      },
+      child: Text(
+        'مشاهده نتیجه',
+        style: TextStyle(
+          fontSize: 16.0,
+        ),
+      ),
     );
   }
 }

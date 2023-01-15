@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quiz_application/home_page.dart';
 
 void main() {
   runApp(const Application());
@@ -9,6 +10,9 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+      theme: ThemeData(fontFamily: 'dana'),
+      home: HomeWidget(),
+    );
   }
 }

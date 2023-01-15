@@ -21,7 +21,54 @@ class Quizpage extends StatelessWidget {
         foregroundColor: yellow,
       ),
       body: SafeArea(
-        child: Text('Quiz page'),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Image(
+              image: AssetImage('images/1.png'),
+              height: 350.0,
+            ),
+            SizedBox(height: 30.0),
+            Text(
+              'مشهورترین شعبده‌باز دنیا چه کسی است؟',
+              style: TextStyle(
+                color: classicBlue,
+                fontSize: 18.0,
+              ),
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 30.0),
+            ListTile(
+              title: Text(
+                'پاسخ اول',
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            ListTile(
+              title: Text(
+                'پاسخ اول',
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            ListTile(
+              title: Text(
+                'پاسخ اول',
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            ListTile(
+              title: Text(
+                'پاسخ اول',
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

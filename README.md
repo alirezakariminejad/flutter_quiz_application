@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+<img src="https://github.com/alirezakariminejad/flutter_quiz_application/blob/master/images/Screenshot.png?raw=true" width="360" alt="app screenshot"/>
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

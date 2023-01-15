@@ -12,7 +12,7 @@ List<Question> getQuestionsList() {
   Question firstQuestion = Question();
   firstQuestion.questionTitle = 'مشهورترین شعبده‌باز دنیا چه کسی است؟';
   firstQuestion.imageNumber = '1';
-  firstQuestion.correctAnswer = 1;
+  firstQuestion.correctAnswer = 2;
   firstQuestion.answers = [
     'علیرضا کریمی نژاد',
     'دیوید کاپرفیلد',
@@ -23,7 +23,7 @@ List<Question> getQuestionsList() {
   Question secondQuestion = Question();
   secondQuestion.questionTitle = 'چه کشوری ایستگاه فضایی میر را بنا کرد؟';
   secondQuestion.imageNumber = '2';
-  secondQuestion.correctAnswer = 1;
+  secondQuestion.correctAnswer = 0;
   secondQuestion.answers = [
     '(شوروی سابق)روسیه',
     'آمریکا',

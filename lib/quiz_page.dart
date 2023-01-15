@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz_application/constants/constants.dart';
+import 'package:flutter_quiz_application/data/question.dart';
 
-class Quizpage extends StatelessWidget {
+class Quizpage extends StatefulWidget {
   const Quizpage({super.key});
 
   @override
+  State<Quizpage> createState() => _QuizpageState();
+}
+
+class _QuizpageState extends State<Quizpage> {
+  int currentQuestionIndex = 0;
+  Question? currentQuestion;
+  int? lenthOfQuestionList;
+
+  @override
   Widget build(BuildContext context) {
+    currentQuestion = getQuestionsList()[currentQuestionIndex];
+    lenthOfQuestionList = getQuestionsList().length;
+    String currentQuestionImageIndex =
+        getQuestionsList()[currentQuestionIndex].imageNumber!;
     return Scaffold(
       backgroundColor: lightGray,
       appBar: AppBar(
         elevation: 0.0,
         title: Text(
-          'صفحه شروع بازی',
+          'سوالات',
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
@@ -25,12 +39,12 @@ class Quizpage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Image(
-              image: AssetImage('images/1.png'),
+              image: AssetImage('images/$currentQuestionImageIndex.png'),
               height: 350.0,
             ),
             SizedBox(height: 30.0),
             Text(
-              'مشهورترین شعبده‌باز دنیا چه کسی است؟',
+              currentQuestion!.questionTitle!,
               style: TextStyle(
                 color: classicBlue,
                 fontSize: 18.0,
@@ -39,37 +53,36 @@ class Quizpage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 30.0),
-            ListTile(
-              title: Text(
-                'پاسخ اول',
-                textDirection: TextDirection.rtl,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'پاسخ اول',
-                textDirection: TextDirection.rtl,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'پاسخ اول',
-                textDirection: TextDirection.rtl,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'پاسخ اول',
-                textDirection: TextDirection.rtl,
-                textAlign: TextAlign.center,
-              ),
+            ...List.generate(
+              4,
+              (index) => getOptionsLists(index),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget getOptionsLists(int index) {
+    return ListTile(
+      title: Text(
+        currentQuestion!.answers![index],
+        textDirection: TextDirection.rtl,
+        textAlign: TextAlign.center,
+      ),
+      onTap: () {
+        // if (currentQuestion!.correctAnswer == index) {
+        //   print('currect');
+        // } else {
+        //   print('wrong');
+        // }
+
+        setState(() {
+          if (currentQuestionIndex < lenthOfQuestionList! - 1) {
+            currentQuestionIndex++;
+          }
+        });
+      },
     );
   }
 }
